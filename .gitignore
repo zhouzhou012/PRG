@@ -1,0 +1,14 @@
+# 过滤掉所有大数据和模型
+*.pth
+*.weights
+*.h5
+*.onnx
+data/
+datasets/
+video/
+batch/
+build/
+bin/
+*.mp4
+*.zip
+*.tar.gz
