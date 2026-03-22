@@ -272,25 +272,6 @@ class HeatmapHead(BaseHead):
 
         preds = self.decode(batch_heatmaps)
 
-
-        # scores = torch.stack(
-        #     [torch.from_numpy(p.keypoint_scores).float().to(batch_heatmaps.device).squeeze(0)
-        #      for p in preds],
-        #     dim=0
-        # )
-
-        # 　可视化部分关键点热图
-        # (14,) 的 mask
-        keep_mask = torch.zeros(17, device=batch_heatmaps.device)
-        keep_mask[10] = 1.0  # left knee
-        # keep_mask[11] = 1.0  # right knee
-
-        # broadcast 到 (1,14,1,1)
-        keep_mask = keep_mask.view(1, 17, 1, 1)
-
-        selected_heatmaps = batch_heatmaps * keep_mask
-
-
         if test_cfg.get('output_heatmaps', False):
             pred_fields = [
                 # PixelData(heatmaps=hm) for hm in batch_heatmaps.detach()
@@ -326,48 +307,6 @@ class HeatmapHead(BaseHead):
             d.gt_instance_labels.keypoint_weights for d in batch_data_samples
         ])
 
-        # #解码坐标
-        # preds = self.decode(pred_fields)
-        # batch=pred_fields.shape[0]
-        # scores = [data.keypoint_scores for data in preds]
-        # # 将 Python 列表转换为 NumPy 数组
-        # scores = np.array(scores)  # (B,1,K)
-        # scores = scores.reshape(batch, 17)
-        # #再转为列表　　对应关键点可见性维度（B,17)
-        # scores_list=scores.tolist()
-        # # 将 keypoint_weights 转换为 Python 列表
-        # keypoint_weights_list = keypoint_weights.tolist()
-        #
-        # # 新的分数，根据关键点可见性
-        # new_scores_list = [[elem for elem, weights_elem in zip(row, weights_row) if weights_elem != 0] for row, weights_row in
-        #             zip(scores_list, keypoint_weights_list)]
-        # # 统计scores
-        # for row in new_scores_list:
-        #     for element in row:
-        #         All_scores.append(element)
-        # num+=1
-        # if num>=2340: #一共9364*16  2340*64
-        #     print("len", len(All_scores))
-        #     length = len(All_scores)
-        #     All_scores.sort()
-        #     len0001 = round(length * 0.001)
-        #     print("len0001_scores", All_scores[len0001])
-        #     len0005 = round(length * 0.005)
-        #     print("len0005_scores", All_scores[len0005])
-        #     len001 = round(length * 0.01)
-        #     print("len001_scores", All_scores[len001])
-        #     len005 = round(length * 0.05)
-        #     print("len005_scores", All_scores[len005])
-        #     len01 = round(length * 0.1)
-        #     print("len01_scores", All_scores[len01])
-        #     len03 = round(length * 0.3)
-        #     print("len03_scores", All_scores[len03])
-        #     len05 = round(length * 0.5)
-        #     print("len05_scores", All_scores[len05])
-        #     len07 = round(length * 0.7)
-        #     print("len07_scores", All_scores[len07])
-        #     len09 = round(length * 0.9)
-        #     print("len09_scores", All_scores[len09])
         # calculate losses
         losses = dict()
         loss = self.loss_module(pred_fields, gt_heatmaps, keypoint_weights)
