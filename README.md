@@ -1,6 +1,6 @@
-# A Prior Representation-Guided Method for Low-Resolution Human Pose Estimation (ICMR 2024)
+# A Prior Representation-Guided Method for Low-Resolution Human Pose Estimation (ICMR 2025)
 
-This repository is the official implementation of the paper: **"A Prior Representation-Guided Method for Low-Resolution Human Pose Estimation"**, accepted by **ICMR 2024**.
+This repository is the official implementation of the paper: **"A Prior Representation-Guided Method for Low-Resolution Human Pose Estimation"**, accepted by **ICMR 2025**.
 
 ---
 
@@ -8,11 +8,11 @@ This repository is the official implementation of the paper: **"A Prior Represen
 
 Human pose estimation (HPE) has achieved significant progress on high-resolution (HR) images, but it experiences severe performance degradation on low-resolution (LR) images. One key reason is that LR images lack sufficient appearance details and fine-grained spatial information. 
 
-In this paper, we propose a **Prior Representation-Guided method (PRG)** for low-resolution human pose estimation. Our approach consists of two stages:
-* **Stage 1:** We design a prior representation extraction network to obtain prior knowledge from HR images. We then propose **Dynamic Residual Blocks** that utilize the extracted prior representation to guide the pose estimation network, focusing on detailed features around joint areas. 
-* **Stage 2:** We utilize a **compact diffusion model** with fewer iterations to generate consistent prior representations directly from LR images, effectively eliminating the reliance on HR images during inference.
+In this paper, we propose a Prior Representation-Guided method (PRG) for low-resolution human pose estimation. Our approach consists of two stages:
+* **Stage 1:** We design a prior representation extraction network to obtain prior knowledge from HR images. We then propose Dynamic Residual Blocks that utilize the extracted prior representation to guide the pose estimation network, focusing on detailed features around joint areas. 
+* **Stage 2:** We utilize a compact diffusion model with fewer iterations to generate consistent prior representations directly from LR images, effectively eliminating the reliance on HR images during inference.
 
-Extensive experiments demonstrate that our method achieves significant improvements across various resolutions and backbone networks. Notably, our method improves **16.4 AP** compared to the SimCC-Res50 baseline at a resolution of $32 \times 32$.
+Extensive experiments demonstrate that our method achieves significant improvements across various resolutions and backbone networks. Notably, our method improves 16.4 AP compared to the SimCC-Res50 baseline at a resolution of $32 \times 32$.
 
 ---
 
