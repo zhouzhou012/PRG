@@ -19,7 +19,6 @@ Extensive experiments demonstrate that our method achieves significant improveme
 ## 🏗️ Framework Overview
 
 ![Model Architecture](./framework.png)
-> *Note: Please upload your framework image to the `assets` folder and ensure the path above is correct.*
 
 ---
 
@@ -51,7 +50,7 @@ Before starting Stage 2, you must manually update the configuration file to load
 
 ```python
 # In your Stage 2 config file
-s1_pretrained = '/path/to/your/work_dirs/best_coco_AP_epoch_210.pth'
+s1_pretrained = 'work_dirs/path/to/your/best_coco_AP_epoch_210.pth'
 ```
 
 Then, execute Stage 2 training:
@@ -66,4 +65,17 @@ Once Stage 2 is finished, evaluate the final model:
 python tools/test.py \
     configs/Dynamic/coco/Prior_stage2_simcc_hrnet_w32-1xb64_210e_coco_32x32.py \
     work_dirs/path/to/your/final_model.pth
-```    
+```
+
+## 📌 Citation
+
+If you find this work useful for your research, please consider citing:
+
+```bibtex
+@inproceedings{jiang2025prior,
+  title={A Prior Representation-Guided Method for Low-Resolution Human Pose Estimation},
+  author={Jiang, Mengting and An, Xiaoqi and Gao, Yang and Xu, Yalong and Wang, Di and Zhao, Lin},
+  booktitle={Proceedings of the 2025 International Conference on Multimedia Retrieval},
+  pages={1988--1992},
+  year={2025}
+}
