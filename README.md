@@ -39,26 +39,31 @@ The training process follows a two-stage pipeline:
 Train the first-stage model to obtain the prior representation from HR images:
 ```bash
 python tools/train.py configs/Dynamic/coco/Prior_stage1_simcc_hrnet_w32-1xb64_210e_coco_32x32.py
-
+```
 After training, you will obtain a checkpoint file (e.g., best_coco_AP_epoch_210.pth).
 
-2. Training - Stage 2
+### 2. Training - Stage 2
 
 Before starting Stage 2, you must manually update the configuration file to load the Stage 1 checkpoint.
 
-Modify the s1_pretrained path in:
+**Modify the `s1_pretrained` path in:**
+`configs/Dynamic/coco/Prior_stage2_simcc_hrnet_w32-1xb64_210e_coco_32x32.py`
 
-configs/Dynamic/coco/Prior_stage2_simcc_hrnet_w32-1xb64_210e_coco_32x32.py
+```python
 # In your Stage 2 config file
 s1_pretrained = '/path/to/your/work_dirs/best_coco_AP_epoch_210.pth'
+```
 
 Then, execute Stage 2 training:
 
+```bash
 python tools/train.py configs/Dynamic/coco/Prior_stage2_simcc_hrnet_w32-1xb64_210e_coco_32x32.py
-3. Testing
+```
+### 3. Testing
 
 Once Stage 2 is finished, evaluate the final model:
-
+```bash
 python tools/test.py \
     configs/Dynamic/coco/Prior_stage2_simcc_hrnet_w32-1xb64_210e_coco_32x32.py \
     work_dirs/path/to/your/final_model.pth
+```    
